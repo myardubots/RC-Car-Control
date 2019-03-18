@@ -1,0 +1,68 @@
+//To connect the receiver to the arduino and check it's values on serial monitor
+//this code is to map and constrain the pulse values and convert them into pwm signals
+//We will further use this code to create rc car control
+
+const int ch_1_PIN = 9;// connect channel 1 pin to pin no.9
+const int ch_2_PIN = 8;// connect channel 2 pin to pin no. 8
+
+const int stop_near_centre = 25;
+
+
+void setup() { 
+    Serial.begin(9600);
+}
+
+void loop() {
+     int CH1 = pulseIn(ch_1_PIN,HIGH,25000);
+     int CH2 = pulseIn(ch_2_PIN,HIGH,25000);
+
+    int x = convert_PWM(CH1);
+    int y = convert_PWM(CH2);
+
+    
+
+      print_val(x,y);
+          }
+  
+void print_val(int x ,int y){
+    
+
+       Serial.print("CH 1 ");
+       Serial.print(x);
+       Serial.print("\t\t\tCH 2 ");
+       Serial.print(y);
+       Serial.println();
+
+       delay(50);
+  }
+
+
+ 
+int convert_PWM(int pulse){
+
+  /*
+   * here we map and constrain the values received from the transmitter
+   * convert these values into PWM signals FROM -255 to 255 so that we can use 
+   * these values to control speed in case we are using motor driver.
+   */
+   
+   if (pulse > 1000){
+    pulse = map(pulse,1000,2000,-500,500);//we map the lower values of 1000 to -500 and 2000 to 500
+    pulse = constrain(pulse,-255,255);//constrain the values in -255 to 255 
+    }
+    else{
+      pulse = 0 ;
+      }
+
+      /*
+       * when knob are nearby centre of the transmitter we stop the motors  
+       * we declared a variable stop_near_centre.
+       * 
+       */
+
+       if(abs(pulse) <= stop_near_centre){
+        pulse = 0;
+        }
+        
+        return pulse;
+  }
