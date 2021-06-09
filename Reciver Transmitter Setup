@@ -1,12 +1,11 @@
-//To connect the receiver to the arduino and check it's values on serial monitor
-//this code is to map and constrain the pulse values and convert them into pwm signals
-//We will further use this code to create rc car control
+// To connect the receiver to the arduino and check it's values on serial monitor
+// this code is to map and constrain the pulse values and convert them into pwm signals
+// We will further use this code to create rc car control
 
-const int ch_1_PIN = 9;// connect channel 1 pin to pin no.9
-const int ch_2_PIN = 8;// connect channel 2 pin to pin no. 8
+const int ch_1_PIN = 9; // connect channel 1 pin to pin no.9
+const int ch_2_PIN = 8; // connect channel 2 pin to pin no. 8
 
 const int stop_near_centre = 25;
-
 
 void setup() { 
     Serial.begin(9600);
@@ -19,14 +18,11 @@ void loop() {
     int x = convert_PWM(CH1);
     int y = convert_PWM(CH2);
 
-    
-
       print_val(x,y);
           }
   
 void print_val(int x ,int y){
     
-
        Serial.print("CH 1 ");
        Serial.print(x);
        Serial.print("\t\t\tCH 2 ");
@@ -35,8 +31,6 @@ void print_val(int x ,int y){
 
        delay(50);
   }
-
-
  
 int convert_PWM(int pulse){
 
