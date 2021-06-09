@@ -4,13 +4,10 @@ const int LB = 4;
 const int RF = 5;
 const int RB = 6;
 
-const int ch_1_PIN = 9;// connect channel 1 pin to pin no.9
-const int ch_2_PIN = 8;// connect channel 2 pin to pin no. 8
-
+const int ch_1_PIN = 9; // connect channel 1 pin to pin no.9
+const int ch_2_PIN = 8; // connect channel 2 pin to pin no. 8
 
 const int stop_near_centre = 150; //stops car when knob of the transmitter is near the centre 
-
-
 
 void setup() {
   pinMode(ch_1_PIN, INPUT);
@@ -32,8 +29,6 @@ void loop() {
     int x = convert_PWM(CH1);
     int y = convert_PWM(CH2);
 
-  
- 
   if(x == 0 && y == 0){
   digitalWrite(LF , LOW);
   digitalWrite(LB , LOW);
@@ -96,9 +91,7 @@ void loop() {
   digitalWrite(RF , LOW);
   digitalWrite(RB , LOW);
     }
-
-  
-  
+    
   delay(10);
 }
 
